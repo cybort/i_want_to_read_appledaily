@@ -1,0 +1,19 @@
+{
+  "name": "我要看蘋果新聞！",
+  "version": "1.0.0",
+  "description": "不用註冊蘋果新聞，也能閱讀蘋果新聞。",
+  "manifest_version": 2,
+  "permissions": [
+    "https://*.appledaily.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.appledaily.com/*"
+      ],
+      "js": [
+        "src/main.js"
+      ]
+    }
+  ]
+}
