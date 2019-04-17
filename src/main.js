@@ -5,14 +5,22 @@ const ElementRepo = {
   articleWrapper(doc) {
     return doc.querySelector(".ndArticle_content");
   },
-  blocker(doc) {
-    return doc.querySelector(".ndPaywall");
+  blockers(doc) {
+    return document.querySelectorAll(".ndPaywall,.ndgPayway");
   }
 };
 
-const isArticlePage = () => !!document.querySelector(".ndArticle_content");
+const isDesktop = () => !!document.querySelector(".ndArticle_content");
+const isMobile = () =>
+  document
+    .querySelector("meta[name=viewport]")
+    .content.includes("width=device-width");
 
-if (isArticlePage()) {
+ElementRepo.blockers(document).forEach(node =>
+  node.parentNode.removeChild(node)
+);
+
+if (isDesktop()) {
   fetch(location.href)
     .then(response => response.text())
     .then(body => {
@@ -23,7 +31,20 @@ if (isArticlePage()) {
       $article.style.removeProperty("display");
       const $wrapper = ElementRepo.articleWrapper(document);
       $wrapper.insertBefore($article, $wrapper.firstChild);
-      const $blocker = ElementRepo.blocker(document);
-      $blocker.parentNode.removeChild($blocker);
     });
+} else if (isMobile()) {
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(() => {
+      document.documentElement.style.removeProperty("overflow-y");
+      document.body.style.removeProperty("overflow-y");
+    });
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["style"]
+  });
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["style"]
+  });
 }
