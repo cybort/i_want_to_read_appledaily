@@ -3,17 +3,16 @@
   "version": "1.0.0",
   "description": "不用註冊蘋果新聞，也能閱讀蘋果新聞。",
   "manifest_version": 2,
-  "permissions": [
-    "https://*.appledaily.com/"
-  ],
+  "permissions": ["https://*.appledaily.com/"],
+  "icons": {
+    "16": "src/icons/16.png",
+    "48": "src/icons/48.png",
+    "128": "src/icons/128.png"
+  },
   "content_scripts": [
     {
-      "matches": [
-        "https://*.appledaily.com/*"
-      ],
-      "js": [
-        "src/main.js"
-      ],
+      "matches": ["https://*.appledaily.com/*"],
+      "js": ["src/main.js"],
       "run_at": "document_end"
     }
   ]
