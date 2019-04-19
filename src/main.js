@@ -6,7 +6,7 @@ const ElementRepo = {
     return doc.querySelector(".ndArticle_content");
   },
   blockers(doc) {
-    return document.querySelectorAll(".ndPaywall,.ndgPayway");
+    return doc.querySelectorAll(".ndPaywall,.ndgPayway");
   }
 };
 
