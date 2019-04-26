@@ -13,7 +13,7 @@
     {
       "matches": ["https://*.appledaily.com/*"],
       "js": ["src/main.js"],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ]
 }
